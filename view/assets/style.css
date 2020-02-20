@@ -1,0 +1,4 @@
+.remove {
+	filter: brightness(10%);
+	display: none;
+}
