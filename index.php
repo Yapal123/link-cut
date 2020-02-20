@@ -16,6 +16,16 @@ Router::route('/', function(){
 Router::route('/link-generate', function(){
   $link = $_POST['link'];
   $links = new Links;
+
+  /**
+   * Cutting of protocol for redirecting
+   */
+  if (strpos($link, 'https://') !== false) {
+  	$link = str_replace('https://','',$link);
+
+  } else if (strpos($link, 'http://') !== false){
+  	$link = str_replace('http://','',$link);
+  }
   $link_args = $links->generate_link($link);
   $links->add_link($link_args['params']);	
   echo json_encode($link_args['user_link']);
